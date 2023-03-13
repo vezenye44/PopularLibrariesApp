@@ -2,5 +2,7 @@
 <resources>
     <!-- activity_main / -->
     <dimen name="activity_main_container_paddings">16dp</dimen>
+    <dimen name="item_view_container_height">50dp</dimen>
+    <dimen name="item_view_login_textview_margin_start">16dp</dimen>
     <!-- / activity_main -->
 </resources>
