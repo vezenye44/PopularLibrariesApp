@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.ui.outher
+package com.example.popularlibrariesapp.ui.interfaces.list
 
 interface IListPresenter<V : IItemView> {
     var itemClickListener: ((V) -> Unit)?
