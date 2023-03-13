@@ -1,15 +1,20 @@
 package com.example.popularlibrariesapp
 
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
+
 interface CounterContract {
-    interface View {
-        fun showMeaningFirstCounter(meaning: Int)
-        fun showMeaningSecondCounter(meaning: Int)
-        fun showMeaningThirdCounter(meaning: Int)
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    interface View : MvpView {
+        fun showMeaningFirstCounter(meaning: String)
+        fun showMeaningSecondCounter(meaning: String)
+        fun showMeaningThirdCounter(meaning: String)
     }
 
-    interface Presenter {
+    /*interface Presenter {
         fun onFirstCounterClick()
         fun onSecondCounterClick()
         fun onThirdCounterClick()
-    }
+    }*/
 }

@@ -1,13 +1,14 @@
 package com.example.popularlibrariesapp
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.popularlibrariesapp.databinding.ActivityMainBinding
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
-class MainActivity : AppCompatActivity(), CounterContract.View {
+class MainActivity : MvpAppCompatActivity(), CounterContract.View {
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter: CounterContract.Presenter = CounterPresenter(this)
+    private val presenter by moxyPresenter { CounterPresenter(CounterModel()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +30,16 @@ class MainActivity : AppCompatActivity(), CounterContract.View {
         }
     }
 
-    override fun showMeaningFirstCounter(meaning: Int) {
-        binding.mainActivityCounterOneBtn.text = meaning.toString()
+    override fun showMeaningFirstCounter(meaning: String) {
+        binding.mainActivityCounterOneBtn.text = meaning
     }
 
-    override fun showMeaningSecondCounter(meaning: Int) {
-        binding.mainActivityCounterTwoBtn.text = meaning.toString()
+    override fun showMeaningSecondCounter(meaning: String) {
+        binding.mainActivityCounterTwoBtn.text = meaning
     }
 
-    override fun showMeaningThirdCounter(meaning: Int) {
-        binding.mainActivityCounterThreeBtn.text = meaning.toString()
+    override fun showMeaningThirdCounter(meaning: String) {
+        binding.mainActivityCounterThreeBtn.text = meaning
     }
 
 }

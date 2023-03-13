@@ -1,23 +1,23 @@
 package com.example.popularlibrariesapp
 
+import moxy.MvpPresenter
+
 class CounterPresenter(
-    private val view: CounterContract.View
-) : CounterContract.Presenter {
+    private val model: CounterModel
+) : MvpPresenter<CounterContract.View>() {
 
-    private val model = CounterModel()
-
-    override fun onFirstCounterClick() {
+    fun onFirstCounterClick() {
         val nextValue = model.next(0)
-        view.showMeaningFirstCounter(nextValue)
+        viewState.showMeaningFirstCounter(nextValue.toString())
     }
 
-    override fun onSecondCounterClick() {
+    fun onSecondCounterClick() {
         val nextValue = model.next(1)
-        view.showMeaningSecondCounter(nextValue)
+        viewState.showMeaningSecondCounter(nextValue.toString())
     }
 
-    override fun onThirdCounterClick() {
+    fun onThirdCounterClick() {
         val nextValue = model.next(2)
-        view.showMeaningThirdCounter(nextValue)
+        viewState.showMeaningThirdCounter(nextValue.toString())
     }
 }
