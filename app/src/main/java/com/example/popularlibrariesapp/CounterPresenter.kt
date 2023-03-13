@@ -1,23 +1,23 @@
 package com.example.popularlibrariesapp
 
-class CounterPresenter(private val view: CounterContract.View) {
+class CounterPresenter(
+    private val view: CounterContract.View
+) : CounterContract.Presenter {
+
     private val model = CounterModel()
 
-    // TODO : Исправить реализацию
-    fun counterClick(id: Int) {
-        when (id) {
-            R.id.main_activity_counter_one_btn -> {
-                val nextValue = model.next(0)
-                view.setButtonText(0, nextValue.toString())
-            }
-            R.id.main_activity_counter_two_btn -> {
-                val nextValue = model.next(1)
-                view.setButtonText(1, nextValue.toString())
-            }
-            R.id.main_activity_counter_three_btn -> {
-                val nextValue = model.next(2)
-                view.setButtonText(2, nextValue.toString())
-            }
-        }
+    override fun onFirstCounterClick() {
+        val nextValue = model.next(0)
+        view.showMeaningFirstCounter(nextValue)
+    }
+
+    override fun onSecondCounterClick() {
+        val nextValue = model.next(1)
+        view.showMeaningSecondCounter(nextValue)
+    }
+
+    override fun onThirdCounterClick() {
+        val nextValue = model.next(2)
+        view.showMeaningThirdCounter(nextValue)
     }
 }

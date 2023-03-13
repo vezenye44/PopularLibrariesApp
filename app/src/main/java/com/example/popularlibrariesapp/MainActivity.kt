@@ -1,14 +1,13 @@
 package com.example.popularlibrariesapp
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.popularlibrariesapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), CounterContract.View {
 
     private lateinit var binding: ActivityMainBinding
-    private val presenter = CounterPresenter(this)
+    private val presenter: CounterContract.Presenter = CounterPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,20 +18,27 @@ class MainActivity : AppCompatActivity(), CounterContract.View {
     }
 
     private fun initView() {
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
+        binding.mainActivityCounterOneBtn.setOnClickListener {
+            presenter.onFirstCounterClick()
         }
-
-        binding.mainActivityCounterOneBtn.setOnClickListener(listener)
-        binding.mainActivityCounterTwoBtn.setOnClickListener(listener)
-        binding.mainActivityCounterThreeBtn.setOnClickListener(listener)
-    }
-
-    override fun setButtonText(index: Int, text: String) {
-        when(index){
-            0 -> binding.mainActivityCounterOneBtn.text = text
-            1 -> binding.mainActivityCounterTwoBtn.text = text
-            2 -> binding.mainActivityCounterThreeBtn.text = text
+        binding.mainActivityCounterTwoBtn.setOnClickListener {
+            presenter.onSecondCounterClick()
+        }
+        binding.mainActivityCounterThreeBtn.setOnClickListener {
+            presenter.onThirdCounterClick()
         }
     }
+
+    override fun showMeaningFirstCounter(meaning: Int) {
+        binding.mainActivityCounterOneBtn.text = meaning.toString()
+    }
+
+    override fun showMeaningSecondCounter(meaning: Int) {
+        binding.mainActivityCounterTwoBtn.text = meaning.toString()
+    }
+
+    override fun showMeaningThirdCounter(meaning: Int) {
+        binding.mainActivityCounterThreeBtn.text = meaning.toString()
+    }
+
 }
