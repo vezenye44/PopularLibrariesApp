@@ -2,9 +2,11 @@ package com.example.popularlibrariesapp.ui.users
 
 import com.example.popularlibrariesapp.domain.dto.GithubUser
 import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
-class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<UsersContract.View>() {
+class UsersPresenter(private val usersRepo: GithubUsersRepo, val router: Router) :
+    MvpPresenter<UsersContract.View>() {
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
         override var itemClickListener: ((UserItemView) -> Unit)? = null
@@ -29,5 +31,10 @@ class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<Users
         val users = usersRepo.getUsers()
         usersListPresenter.users.addAll(users)
         viewState.updateList()
+    }
+
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
     }
 }
