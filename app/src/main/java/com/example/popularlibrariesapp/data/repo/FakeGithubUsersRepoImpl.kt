@@ -2,6 +2,7 @@ package com.example.popularlibrariesapp.data.repo
 
 import com.example.popularlibrariesapp.domain.dto.GithubUser
 import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
+import io.reactivex.rxjava3.core.Observable
 
 class FakeGithubUsersRepoImpl: GithubUsersRepo {
 
@@ -14,5 +15,6 @@ class FakeGithubUsersRepoImpl: GithubUsersRepo {
     )
 
     override fun getUsers() : List<GithubUser> = repositories
+    override fun getUsersByRx(): Observable<List<GithubUser>> = Observable.just(repositories)
 
 }

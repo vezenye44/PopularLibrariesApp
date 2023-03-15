@@ -6,6 +6,9 @@ import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
 import com.example.popularlibrariesapp.ui.users.rv.IUserListPresenter
 import com.example.popularlibrariesapp.ui.users.rv.UserItemView
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import moxy.MvpPresenter
 
 class UsersPresenter(
@@ -35,10 +38,24 @@ class UsersPresenter(
         }
     }
 
+    private lateinit var disposable: Disposable
     private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+        disposable = usersRepo
+            .getUsersByRx()
+            .switchMap {
+                return@switchMap Observable.just(it)
+            }
+            .subscribeBy(
+            onNext = {
+                usersListPresenter.users.addAll(it)
+                viewState.updateList()
+            }
+        )
+    }
+
+    override fun onDestroy() {
+        disposable.dispose()
+        super.onDestroy()
     }
 
     fun backPressed(): Boolean {
