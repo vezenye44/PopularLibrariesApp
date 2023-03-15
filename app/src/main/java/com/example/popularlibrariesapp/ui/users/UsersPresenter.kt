@@ -2,7 +2,10 @@ package com.example.popularlibrariesapp.ui.users
 
 import com.example.popularlibrariesapp.domain.dto.GithubUser
 import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
+import com.example.popularlibrariesapp.ui.userprofile.UserProfileFragment
 import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.Screen
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import moxy.MvpPresenter
 
 class UsersPresenter(private val usersRepo: GithubUsersRepo, val router: Router) :
@@ -23,7 +26,9 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, val router: Router)
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { itemView ->
-            //TODO: переход на экран пользователя
+            val screen: Screen =
+                FragmentScreen { UserProfileFragment.newInstance(usersListPresenter.users[itemView.pos].login) }
+            router.navigateTo(screen, true)
         }
     }
 
