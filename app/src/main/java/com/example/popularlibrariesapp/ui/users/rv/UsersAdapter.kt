@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.ui.users
+package com.example.popularlibrariesapp.ui.users.rv
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
