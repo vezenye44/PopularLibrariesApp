@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUserProfileBinding
+import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View {
+class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, BackButtonListener {
 
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -42,4 +43,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View {
             }
 
     }
+
+    override fun backPressed() = presenter.backPressed()
+
 }

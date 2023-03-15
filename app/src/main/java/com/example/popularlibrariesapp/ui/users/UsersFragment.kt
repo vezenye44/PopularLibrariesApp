@@ -9,6 +9,8 @@ import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.data.repo.FakeGithubUsersRepoImpl
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
+import com.example.popularlibrariesapp.ui.main.AndroidScreens
+import com.example.popularlibrariesapp.ui.users.rv.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -18,7 +20,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
     }
 
     val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(FakeGithubUsersRepoImpl(), App.instance.router)
+        UsersPresenter(FakeGithubUsersRepoImpl(), App.instance.router, AndroidScreens())
     }
     var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null

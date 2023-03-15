@@ -5,7 +5,6 @@ import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.R
 import com.example.popularlibrariesapp.databinding.ActivityMainBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
-import com.example.popularlibrariesapp.ui.users.AndroidScreens
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

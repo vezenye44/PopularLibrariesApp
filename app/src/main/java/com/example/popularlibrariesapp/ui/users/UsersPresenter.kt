@@ -2,13 +2,17 @@ package com.example.popularlibrariesapp.ui.users
 
 import com.example.popularlibrariesapp.domain.dto.GithubUser
 import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
-import com.example.popularlibrariesapp.ui.userprofile.UserProfileFragment
+import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
+import com.example.popularlibrariesapp.ui.users.rv.IUserListPresenter
+import com.example.popularlibrariesapp.ui.users.rv.UserItemView
 import com.github.terrakok.cicerone.Router
-import com.github.terrakok.cicerone.Screen
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import moxy.MvpPresenter
 
-class UsersPresenter(private val usersRepo: GithubUsersRepo, val router: Router) :
+class UsersPresenter(
+    private val usersRepo: GithubUsersRepo,
+    private val router: Router,
+    private val screens: IScreens
+) :
     MvpPresenter<UsersContract.View>() {
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
@@ -26,13 +30,12 @@ class UsersPresenter(private val usersRepo: GithubUsersRepo, val router: Router)
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { itemView ->
-            val screen: Screen =
-                FragmentScreen { UserProfileFragment.newInstance(usersListPresenter.users[itemView.pos].login) }
-            router.navigateTo(screen, true)
+            val login = usersListPresenter.users[itemView.pos].login
+            router.navigateTo(screens.userProfile(login), true)
         }
     }
 
-    fun loadData() {
+    private fun loadData() {
         val users = usersRepo.getUsers()
         usersListPresenter.users.addAll(users)
         viewState.updateList()
