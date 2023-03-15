@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PopularLibrariesApp</string>
+
+    <!-- activity_main / -->
+    <string name="activity_main_counter_one_textview_text">Счетчик 1</string>
+    <string name="activity_main_counter_two_textview_text">Счетчик 2</string>
+    <string name="activity_main_counter_three_textview_text">Счетчик 3</string>
+    <string name="activity_main_counter_btn_init_text">0</string>
+    <!-- / activity_main -->
 </resources>
