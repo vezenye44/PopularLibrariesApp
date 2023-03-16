@@ -23,27 +23,30 @@ class Operators {
         Consumer(Producer()).execFlatMap()
     }
     class Producer {
-        fun createJust() = Observable.just("1", "2", "3", "3")
+        fun createJust() = Observable.just(1, 2, 3, 4)
     }
     class Consumer(private val producer: Producer) {
         @SuppressLint("CheckResult")
         fun execFlatMap() {
             producer.createJust()
                 .switchMap {
-                    val delay = Random.nextInt(1000).toLong()
-
-                    return@switchMap Observable
+                    val delay = Random.nextInt(60_000).toLong()
+                    val delayByIt = (4000/it).toLong()
+                        .also { delay ->
+                            println("delay: $delay & it: $it")
+                        }
+                        return@switchMap Observable
                         //.range(1,200)
-                        .just(it + "x")
-                        .delay(delay,
+                        .just(it.toString() + "x")
+                        .delay(delayByIt,
                         TimeUnit.MILLISECONDS)
                 }
                 .subscribe({ s ->
-                    Log.d("TAG", "onNext: $s")
                     println("onNext: $s")
                 }, {
-                    Log.d("TAG", "onNext: ${it.message}")
                     println("onError: ${it.message}")
+                }, {
+                    println("onComplete")
                 })
         }
     }
