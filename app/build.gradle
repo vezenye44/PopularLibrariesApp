@@ -40,10 +40,19 @@ android {
 
 dependencies {
 
-    //ReactiveX | Java + Android + Kotlin
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Coil +(or) Glide
+    implementation 'io.coil-kt:coil:2.2.2'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //ReactiveX | Java + Android + Kotlin + RetrofitAdapter
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 
     //Moxy
     implementation 'com.github.moxy-community:moxy:2.2.2'
