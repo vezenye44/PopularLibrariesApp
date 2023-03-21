@@ -6,7 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
+import com.example.popularlibrariesapp.data.image_loaders.GlideImageLoader
 import com.example.popularlibrariesapp.data.repo.FakeGithubUsersRepoImpl
+import com.example.popularlibrariesapp.data.repo.RetrofitGithubUsersRepoImpl
+import com.example.popularlibrariesapp.data.retrofit.GithubApi
+import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.main.AndroidScreens
@@ -19,8 +23,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
         fun newInstance() = UsersFragment()
     }
 
-    val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(FakeGithubUsersRepoImpl(), App.instance.router, AndroidScreens())
+    private val presenter: UsersPresenter by moxyPresenter {
+        UsersPresenter(RetrofitGithubUsersRepoImpl(RetrofitClient().githubApi), App.instance.router, AndroidScreens())
     }
     var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null
@@ -41,7 +45,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
 
     override fun init() {
         binding.usersFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = UsersAdapter(presenter.usersListPresenter)
+        adapter = UsersAdapter(presenter.usersListPresenter, GlideImageLoader())
         binding.usersFragmentRecyclerView.adapter = adapter
     }
 
