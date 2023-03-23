@@ -53,7 +53,9 @@ class UsersPresenter(
                     viewState.updateList()
                 },
                 onError = {
-                    println("Error: ${it.message}")
+                    it.message?.let {errorMessage ->
+                        viewState.showToast(errorMessage)
+                    }
                 }
             )
     }

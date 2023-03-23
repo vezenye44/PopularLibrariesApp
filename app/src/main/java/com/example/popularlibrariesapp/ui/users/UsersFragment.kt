@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.data.image_loaders.GlideImageLoader
-import com.example.popularlibrariesapp.data.repo.FakeGithubUsersRepoImpl
 import com.example.popularlibrariesapp.data.repo.RetrofitGithubUsersRepoImpl
-import com.example.popularlibrariesapp.data.retrofit.GithubApi
 import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
@@ -24,7 +23,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(RetrofitGithubUsersRepoImpl(RetrofitClient().githubApi), App.instance.router, AndroidScreens())
+        UsersPresenter(
+            RetrofitGithubUsersRepoImpl(RetrofitClient().githubApi),
+            App.instance.router,
+            AndroidScreens()
+        )
     }
     var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null
@@ -51,6 +54,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
 
     override fun updateList() {
         adapter?.notifyDataSetChanged()
+    }
+
+    override fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun backPressed() = presenter.backPressed()

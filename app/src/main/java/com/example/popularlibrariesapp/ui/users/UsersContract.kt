@@ -9,5 +9,6 @@ interface UsersContract {
     interface View : MvpView {
         fun init()
         fun updateList()
+        fun showToast(message: String)
     }
 }
