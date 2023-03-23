@@ -8,6 +8,10 @@ interface UsesProfileContract {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface View : MvpView {
+
+        fun init()
+        fun updateList()
         fun showLogin(login: String)
+        fun showToast(message: String)
     }
 }
