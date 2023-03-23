@@ -41,7 +41,8 @@ class UserProfilePresenter(
         viewState.showLogin(usersLogin)
         loadData()
         userRepoListPresenter.itemClickListener = {
-           // router.navigateTo(screens.userRepoInfo())
+            val forksCount: String? = userRepoListPresenter.users[it.pos].forksCount
+            forksCount?.let { router.navigateTo(screens.userRepoInfo(forksCount)) }
         }
     }
 
