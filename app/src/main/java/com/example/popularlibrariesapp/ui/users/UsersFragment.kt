@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
+import com.example.popularlibrariesapp.data.datacash.RoomUserCache
 import com.example.popularlibrariesapp.data.image_loaders.GlideImageLoader
-import com.example.popularlibrariesapp.data.repo.RetrofitGithubUsersRepoImpl
+import com.example.popularlibrariesapp.data.repo.CashedRetrofitGithubUsersRepoImpl
 import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
@@ -24,7 +25,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
 
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
-            RetrofitGithubUsersRepoImpl(RetrofitClient().githubApi),
+            CashedRetrofitGithubUsersRepoImpl(
+                api = RetrofitClient().githubApi,
+                networkStatus = App.instance.networkStatus,
+                userCash = RoomUserCache(App.instance.database)
+            ),
             App.instance.router,
             AndroidScreens()
         )

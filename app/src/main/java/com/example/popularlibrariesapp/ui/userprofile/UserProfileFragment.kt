@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
-import com.example.popularlibrariesapp.data.repo.RetrofitGithubUserReposRepoImpl
+import com.example.popularlibrariesapp.data.datacash.RoomUserRepositoriesCache
+import com.example.popularlibrariesapp.data.repo.CashedRetrofitGithubUserReposRepoImpl
 import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUserProfileBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
@@ -18,14 +19,19 @@ import moxy.ktx.moxyPresenter
 
 class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, BackButtonListener {
 
-    var adapter: UserReposAdapter? = null
+    private var adapter: UserReposAdapter? = null
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
 
     private val presenter: UserProfilePresenter by moxyPresenter {
         val login = arguments?.getString(EXTRA_USER_LOGIN) ?: "Fail"
         UserProfilePresenter(
-            login, RetrofitGithubUserReposRepoImpl(RetrofitClient().githubApi),
+            login,
+            CashedRetrofitGithubUserReposRepoImpl(
+                api = RetrofitClient().githubApi,
+                networkStatus = App.instance.networkStatus,
+                userReposCash = RoomUserRepositoriesCache(App.instance.database)
+            ),
             App.instance.router,
             AndroidScreens()
         )
