@@ -25,7 +25,7 @@ class UsersPresenter(
             val user = users[view.pos]
             user.login?.let { view.setLogin(it) }
             user.id?.let { view.setId(it) }
-            user.avatarUrl?.let {view.loadAvatar(it)}
+            user.avatarUrl?.let { view.loadAvatar(it) }
         }
     }
 
@@ -53,7 +53,7 @@ class UsersPresenter(
                     viewState.updateList()
                 },
                 onError = {
-                    it.message?.let {errorMessage ->
+                    it.message?.let { errorMessage ->
                         viewState.showToast(errorMessage)
                     }
                 }

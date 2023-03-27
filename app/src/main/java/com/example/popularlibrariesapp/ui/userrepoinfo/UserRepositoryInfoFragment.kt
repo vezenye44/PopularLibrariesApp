@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUserRepoInfoBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
-import com.example.popularlibrariesapp.ui.userprofile.UserProfileFragment
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 

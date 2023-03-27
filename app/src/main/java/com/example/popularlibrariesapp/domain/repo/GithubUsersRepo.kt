@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface GithubUsersRepo {
 
-    fun getUsers() : Single<List<GithubUserEntity>>
+    fun getUsers(): Single<List<GithubUserEntity>>
 }
