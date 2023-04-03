@@ -1,8 +1,8 @@
 package com.example.popularlibrariesapp.ui.users
 
 import com.example.popularlibrariesapp.domain.dto.GithubUserEntity
-import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
-import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
+import com.example.popularlibrariesapp.domain.remote.repo.GithubUsersRepo
+import com.example.popularlibrariesapp.ui.base.navigate.IScreens
 import com.example.popularlibrariesapp.ui.users.rv.IUserListPresenter
 import com.example.popularlibrariesapp.ui.users.rv.UserItemView
 import com.github.terrakok.cicerone.Router

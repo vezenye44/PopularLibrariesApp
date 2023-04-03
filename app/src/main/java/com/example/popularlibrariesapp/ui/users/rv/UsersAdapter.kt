@@ -3,7 +3,7 @@ package com.example.popularlibrariesapp.ui.users.rv
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.popularlibrariesapp.domain.image_loaders.IImageLoader
+import com.example.popularlibrariesapp.domain.remote.image_loaders.IImageLoader
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

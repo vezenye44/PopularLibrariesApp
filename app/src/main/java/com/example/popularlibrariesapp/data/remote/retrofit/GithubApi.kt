@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.data.retrofit
+package com.example.popularlibrariesapp.data.remote.retrofit
 
 import com.example.popularlibrariesapp.domain.dto.GithubUserEntity
 import com.example.popularlibrariesapp.domain.dto.GithubUserReposEntity

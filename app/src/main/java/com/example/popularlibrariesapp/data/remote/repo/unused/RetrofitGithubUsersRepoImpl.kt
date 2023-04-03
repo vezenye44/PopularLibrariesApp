@@ -1,7 +1,7 @@
-package com.example.popularlibrariesapp.data.repo
+package com.example.popularlibrariesapp.data.remote.repo.unused
 
-import com.example.popularlibrariesapp.data.retrofit.GithubApi
-import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
+import com.example.popularlibrariesapp.data.remote.retrofit.GithubApi
+import com.example.popularlibrariesapp.domain.remote.repo.GithubUsersRepo
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RetrofitGithubUsersRepoImpl(private val api: GithubApi) : GithubUsersRepo {

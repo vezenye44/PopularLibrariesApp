@@ -1,6 +1,6 @@
 package com.example.popularlibrariesapp.dependency_injection.modules
 
-import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
+import com.example.popularlibrariesapp.ui.base.navigate.IScreens
 import com.example.popularlibrariesapp.ui.main.AndroidScreens
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router

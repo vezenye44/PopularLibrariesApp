@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.domain.internet
+package com.example.popularlibrariesapp.domain.remote
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

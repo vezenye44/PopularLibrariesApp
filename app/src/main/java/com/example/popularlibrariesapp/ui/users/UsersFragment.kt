@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
-import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
+import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.users.rv.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

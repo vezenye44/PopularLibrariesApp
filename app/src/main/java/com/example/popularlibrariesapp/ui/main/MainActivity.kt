@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.R
 import com.example.popularlibrariesapp.databinding.ActivityMainBinding
-import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
+import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity

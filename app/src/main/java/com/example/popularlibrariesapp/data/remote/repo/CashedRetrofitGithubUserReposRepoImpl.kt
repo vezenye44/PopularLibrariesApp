@@ -1,10 +1,10 @@
-package com.example.popularlibrariesapp.data.repo
+package com.example.popularlibrariesapp.data.remote.repo
 
-import com.example.popularlibrariesapp.data.retrofit.GithubApi
+import com.example.popularlibrariesapp.data.remote.retrofit.GithubApi
 import com.example.popularlibrariesapp.domain.datacash.IUserRepositoriesCache
 import com.example.popularlibrariesapp.domain.dto.GithubUserReposEntity
-import com.example.popularlibrariesapp.domain.internet.INetworkStatus
-import com.example.popularlibrariesapp.domain.repo.GithubUserReposRepo
+import com.example.popularlibrariesapp.domain.remote.INetworkStatus
+import com.example.popularlibrariesapp.domain.remote.repo.GithubUserReposRepo
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 

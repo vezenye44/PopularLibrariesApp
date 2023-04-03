@@ -1,11 +1,10 @@
 package com.example.popularlibrariesapp.dependency_injection.modules
 
-import android.content.Context
 import androidx.room.Room
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.data.datacash.RoomUserCache
 import com.example.popularlibrariesapp.data.datacash.RoomUserRepositoriesCache
-import com.example.popularlibrariesapp.data.room.Database
+import com.example.popularlibrariesapp.data.datacash.room.Database
 import com.example.popularlibrariesapp.domain.datacash.IUserCache
 import com.example.popularlibrariesapp.domain.datacash.IUserRepositoriesCache
 import dagger.Module

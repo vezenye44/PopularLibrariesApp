@@ -1,6 +1,6 @@
 package com.example.popularlibrariesapp.data.datacash
 
-import com.example.popularlibrariesapp.data.room.Database
+import com.example.popularlibrariesapp.data.datacash.room.Database
 import com.example.popularlibrariesapp.domain.datacash.IUserCache
 import com.example.popularlibrariesapp.domain.dto.GithubUserEntity
 import com.example.popularlibrariesapp.domain.dto.room.RoomGithubUserEntity

@@ -1,6 +1,6 @@
 package com.example.popularlibrariesapp.ui.main
 
-import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
+import com.example.popularlibrariesapp.ui.base.navigate.IScreens
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import javax.inject.Inject

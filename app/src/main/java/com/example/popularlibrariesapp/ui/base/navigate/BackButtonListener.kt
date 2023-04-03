@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.ui.interfaces.navigate
+package com.example.popularlibrariesapp.ui.base.navigate
 
 interface BackButtonListener {
     fun backPressed(): Boolean

@@ -1,10 +1,10 @@
-package com.example.popularlibrariesapp.data.internet
+package com.example.popularlibrariesapp.data.remote
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import com.example.popularlibrariesapp.domain.internet.INetworkStatus
+import com.example.popularlibrariesapp.domain.remote.INetworkStatus
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class AndroidNetworkStatus(context: Context) : INetworkStatus {

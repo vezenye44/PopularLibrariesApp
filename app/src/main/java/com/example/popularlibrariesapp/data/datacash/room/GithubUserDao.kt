@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.data.room
+package com.example.popularlibrariesapp.data.datacash.room
 
 import androidx.room.*
 import com.example.popularlibrariesapp.domain.dto.room.RoomGithubUserEntity

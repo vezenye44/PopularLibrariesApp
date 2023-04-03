@@ -1,4 +1,4 @@
-package com.example.popularlibrariesapp.domain.repo
+package com.example.popularlibrariesapp.domain.remote.repo
 
 import com.example.popularlibrariesapp.domain.dto.GithubUserEntity
 import io.reactivex.rxjava3.core.Single

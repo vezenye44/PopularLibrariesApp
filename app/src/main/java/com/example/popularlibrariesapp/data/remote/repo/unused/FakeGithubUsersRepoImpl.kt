@@ -1,7 +1,7 @@
-package com.example.popularlibrariesapp.data.repo
+package com.example.popularlibrariesapp.data.remote.repo.unused
 
 import com.example.popularlibrariesapp.domain.dto.GithubUserEntity
-import com.example.popularlibrariesapp.domain.repo.GithubUsersRepo
+import com.example.popularlibrariesapp.domain.remote.repo.GithubUsersRepo
 import io.reactivex.rxjava3.core.Single
 
 class FakeGithubUsersRepoImpl : GithubUsersRepo {
