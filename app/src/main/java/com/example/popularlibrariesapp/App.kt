@@ -1,31 +1,24 @@
 package com.example.popularlibrariesapp
 
 import android.app.Application
-import com.example.popularlibrariesapp.data.internet.AndroidNetworkStatus
-import com.example.popularlibrariesapp.data.room.Database
-import com.example.popularlibrariesapp.domain.internet.INetworkStatus
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
+import com.example.popularlibrariesapp.dependency_injection.components.AppComponent
+import com.example.popularlibrariesapp.dependency_injection.components.DaggerAppComponent
+import com.example.popularlibrariesapp.dependency_injection.modules.AppModule
 
 class App : Application() {
     companion object {
         lateinit var instance: App
     }
 
-    //TODO : Переместить
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-    val router get() = cicerone.router
+    lateinit var appComponent: AppComponent
 
-    lateinit var database: Database
-    lateinit var networkStatus: INetworkStatus
     override fun onCreate() {
         super.onCreate()
         instance = this
-        networkStatus = AndroidNetworkStatus(this)
-        Database.create(this)
-        database = Database.getInstance()
+
+        appComponent = DaggerAppComponent
+            .builder()
+            .appModule(AppModule(this))
+            .build()
     }
 }
