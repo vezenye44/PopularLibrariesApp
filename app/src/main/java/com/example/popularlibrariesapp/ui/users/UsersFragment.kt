@@ -1,5 +1,6 @@
 package com.example.popularlibrariesapp.ui.users
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
-import com.example.popularlibrariesapp.data.datacash.RoomUserCache
-import com.example.popularlibrariesapp.data.image_loaders.GlideImageLoader
-import com.example.popularlibrariesapp.data.repo.CashedRetrofitGithubUsersRepoImpl
-import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
-import com.example.popularlibrariesapp.ui.main.AndroidScreens
 import com.example.popularlibrariesapp.ui.users.rv.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -24,23 +20,18 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            CashedRetrofitGithubUsersRepoImpl(
-                api = RetrofitClient().githubApi,
-                networkStatus = App.instance.networkStatus,
-                userCash = RoomUserCache(App.instance.database)
-            ),
-            App.instance.router,
-            AndroidScreens()
-        )
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
-    var adapter: UsersAdapter? = null
+    private var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
@@ -53,10 +44,12 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
 
     override fun init() {
         binding.usersFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = UsersAdapter(presenter.usersListPresenter, GlideImageLoader())
+        adapter = App.instance.appComponent.usersAdapterFactory()
+            .create(presenter.usersListPresenter)
         binding.usersFragmentRecyclerView.adapter = adapter
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateList() {
         adapter?.notifyDataSetChanged()
     }

@@ -1,5 +1,6 @@
 package com.example.popularlibrariesapp.ui.userprofile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
-import com.example.popularlibrariesapp.data.datacash.RoomUserRepositoriesCache
-import com.example.popularlibrariesapp.data.repo.CashedRetrofitGithubUserReposRepoImpl
-import com.example.popularlibrariesapp.data.retrofit.RetrofitClient
 import com.example.popularlibrariesapp.databinding.FragmentUserProfileBinding
 import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
-import com.example.popularlibrariesapp.ui.main.AndroidScreens
 import com.example.popularlibrariesapp.ui.userprofile.rv.UserReposAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -25,16 +22,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
 
     private val presenter: UserProfilePresenter by moxyPresenter {
         val login = arguments?.getString(EXTRA_USER_LOGIN) ?: "Fail"
-        UserProfilePresenter(
-            login,
-            CashedRetrofitGithubUserReposRepoImpl(
-                api = RetrofitClient().githubApi,
-                networkStatus = App.instance.networkStatus,
-                userReposCash = RoomUserRepositoriesCache(App.instance.database)
-            ),
-            App.instance.router,
-            AndroidScreens()
-        )
+        App.instance.appComponent.userProfilePresenterFactory().create(login)
     }
 
     override fun onCreateView(
@@ -53,6 +41,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateList() {
         adapter?.notifyDataSetChanged()
     }
