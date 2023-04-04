@@ -1,50 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_main_container_paddings">
-
-    <TextView
-        android:id="@+id/main_activity_counter_one_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_one_textview_text" />
-
-    <Button
-        android:id="@+id/main_activity_counter_one_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_btn_init_text"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_counter_one_textview" />
-
-    <TextView
-        android:id="@+id/main_activity_counter_two_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_two_textview_text"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_counter_one_btn" />
-
-    <Button
-        android:id="@+id/main_activity_counter_two_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_btn_init_text"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_counter_two_textview" />
-
-    <TextView
-        android:id="@+id/main_activity_counter_three_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_three_textview_text"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_counter_two_btn" />
-
-    <Button
-        android:id="@+id/main_activity_counter_three_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_main_counter_btn_init_text"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_counter_three_textview" />
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/main_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

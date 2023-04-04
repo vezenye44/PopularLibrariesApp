@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MyMaterialStyle" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#2B2E42</item>
+    </style>
+
+
 </resources>
