@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.StateStrategyType
 
 interface UserRepositoryInfoContract {
     @StateStrategyType(AddToEndSingleStrategy::class)
-    interface View: MvpView {
+    interface View : MvpView {
         fun showForkCount(forkCount: String)
     }
 }

@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popularlibrariesapp.R
 import com.example.popularlibrariesapp.databinding.UsersRecyclerItemBinding
-import com.example.popularlibrariesapp.domain.image_loaders.IImageLoader
+import com.example.popularlibrariesapp.domain.remote.image_loaders.IImageLoader
 
 class UserViewHolder(
     parent: ViewGroup,

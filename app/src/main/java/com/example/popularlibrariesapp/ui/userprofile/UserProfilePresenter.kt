@@ -1,18 +1,26 @@
 package com.example.popularlibrariesapp.ui.userprofile
 
 import com.example.popularlibrariesapp.domain.dto.GithubUserReposEntity
-import com.example.popularlibrariesapp.domain.repo.GithubUserReposRepo
-import com.example.popularlibrariesapp.ui.interfaces.navigate.IScreens
+import com.example.popularlibrariesapp.domain.remote.repo.GithubUserReposRepo
+import com.example.popularlibrariesapp.ui.base.navigate.IScreens
 import com.example.popularlibrariesapp.ui.userprofile.rv.IUserReposListPresenter
 import com.example.popularlibrariesapp.ui.userprofile.rv.UserRepoItemView
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import moxy.MvpPresenter
 
-class UserProfilePresenter(
-    private val usersLogin: String,
+@AssistedFactory
+interface UserProfilePresenterFactory {
+    fun create(usersLogin: String): UserProfilePresenter
+}
+
+class UserProfilePresenter @AssistedInject constructor(
+    @Assisted private val usersLogin: String,
     private val repository: GithubUserReposRepo,
     private val router: Router,
     private val screens: IScreens

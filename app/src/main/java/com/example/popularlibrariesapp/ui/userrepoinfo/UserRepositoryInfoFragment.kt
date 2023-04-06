@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUserRepoInfoBinding
-import com.example.popularlibrariesapp.ui.interfaces.navigate.BackButtonListener
-import com.example.popularlibrariesapp.ui.userprofile.UserProfileFragment
+import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -20,7 +19,7 @@ class UserRepositoryInfoFragment() : MvpAppCompatFragment(), UserRepositoryInfoC
 
     private val presenter: UserRepositoryInfoPresenter by moxyPresenter {
         val forkCount = arguments?.getString(EXTRA_FORK_COUNT) ?: "Fail"
-        return@moxyPresenter UserRepositoryInfoPresenter(forkCount, App.instance.router)
+        App.instance.appComponent.userRepositoryInfoPresenterFactory().create(forkCount)
     }
 
     override fun onCreateView(
