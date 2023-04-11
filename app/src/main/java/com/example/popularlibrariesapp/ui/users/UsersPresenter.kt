@@ -6,23 +6,27 @@ import com.example.popularlibrariesapp.ui.base.navigate.IScreens
 import com.example.popularlibrariesapp.ui.users.rv.IUserListPresenter
 import com.example.popularlibrariesapp.ui.users.rv.UserItemView
 import com.github.terrakok.cicerone.Router
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class UsersPresenter() :
+@AssistedFactory
+interface UsersPresenterFactory {
+    fun create(uiScheduler: Scheduler): UsersPresenter
+}
+
+class UsersPresenter @AssistedInject constructor(
+    @Assisted private val uiScheduler: Scheduler,
+    private val usersRepo: GithubUsersRepo,
+    private val router: Router,
+    private val screens: IScreens,
+) :
     MvpPresenter<UsersContract.View>() {
 
-    @Inject
-    lateinit var usersRepo: GithubUsersRepo
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var screens: IScreens
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUserEntity>()
@@ -53,7 +57,7 @@ class UsersPresenter() :
     private fun loadData() {
         disposable = usersRepo
             .getUsers()
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(uiScheduler)
             .subscribeBy(
                 onSuccess = {
                     usersListPresenter.users.addAll(it)

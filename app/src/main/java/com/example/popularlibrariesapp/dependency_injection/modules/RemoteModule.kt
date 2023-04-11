@@ -2,15 +2,15 @@ package com.example.popularlibrariesapp.dependency_injection.modules
 
 import android.widget.ImageView
 import com.example.popularlibrariesapp.App
-import com.example.popularlibrariesapp.data.remote.image_loaders.GlideImageLoader
 import com.example.popularlibrariesapp.data.remote.AndroidNetworkStatus
+import com.example.popularlibrariesapp.data.remote.image_loaders.GlideImageLoader
 import com.example.popularlibrariesapp.data.remote.repo.CashedRetrofitGithubUserReposRepoImpl
 import com.example.popularlibrariesapp.data.remote.repo.CashedRetrofitGithubUsersRepoImpl
 import com.example.popularlibrariesapp.data.remote.retrofit.GithubApi
 import com.example.popularlibrariesapp.domain.datacash.IUserCache
 import com.example.popularlibrariesapp.domain.datacash.IUserRepositoriesCache
-import com.example.popularlibrariesapp.domain.remote.image_loaders.IImageLoader
 import com.example.popularlibrariesapp.domain.remote.INetworkStatus
+import com.example.popularlibrariesapp.domain.remote.image_loaders.IImageLoader
 import com.example.popularlibrariesapp.domain.remote.repo.GithubUserReposRepo
 import com.example.popularlibrariesapp.domain.remote.repo.GithubUsersRepo
 import com.google.gson.FieldNamingPolicy

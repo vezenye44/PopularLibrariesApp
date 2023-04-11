@@ -11,6 +11,7 @@ import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
 import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.users.rv.UsersAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -20,9 +21,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.usersPresenterFactory().create(AndroidSchedulers.mainThread())
     }
     private var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null

@@ -11,6 +11,7 @@ import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUserProfileBinding
 import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.userprofile.rv.UserReposAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -22,7 +23,8 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
 
     private val presenter: UserProfilePresenter by moxyPresenter {
         val login = arguments?.getString(EXTRA_USER_LOGIN) ?: "Fail"
-        App.instance.appComponent.userProfilePresenterFactory().create(login)
+        App.instance.appComponent.userProfilePresenterFactory()
+            .create(login, AndroidSchedulers.mainThread())
     }
 
     override fun onCreateView(
@@ -32,6 +34,11 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
     ): View {
         _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     override fun init() {
