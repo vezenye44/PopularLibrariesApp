@@ -72,6 +72,7 @@ class UsersPresenter @AssistedInject constructor(
     }
 
     override fun onDestroy() {
+        viewState.disableInjection()
         disposable.dispose()
         super.onDestroy()
     }

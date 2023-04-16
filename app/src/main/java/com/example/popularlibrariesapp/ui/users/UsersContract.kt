@@ -8,6 +8,7 @@ interface UsersContract {
     @StateStrategyType(AddToEndSingleStrategy::class)
     interface View : MvpView {
         fun init()
+        fun disableInjection()
         fun updateList()
         fun showToast(message: String)
     }

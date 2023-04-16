@@ -23,8 +23,9 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
 
     private val presenter: UserProfilePresenter by moxyPresenter {
         val login = arguments?.getString(EXTRA_USER_LOGIN) ?: "Fail"
-        App.instance.appComponent.userProfilePresenterFactory()
-            .create(login, AndroidSchedulers.mainThread())
+        App.instance.initUserReposSubcomponent()
+        val subcomponent = App.instance.userReposSubcomponent
+        subcomponent!!.userProfilePresenterFactory().create(login, AndroidSchedulers.mainThread())
     }
 
     override fun onCreateView(
@@ -45,6 +46,10 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
         binding.fragmentUserProfileReposRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter = UserReposAdapter(presenter.userRepoListPresenter)
         binding.fragmentUserProfileReposRecyclerView.adapter = adapter
+    }
+
+    override fun disableInjection() {
+        App.instance.disableUserReposSubcomponent()
     }
 
 

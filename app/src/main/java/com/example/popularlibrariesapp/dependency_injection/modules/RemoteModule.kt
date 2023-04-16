@@ -4,15 +4,9 @@ import android.widget.ImageView
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.data.remote.AndroidNetworkStatus
 import com.example.popularlibrariesapp.data.remote.image_loaders.GlideImageLoader
-import com.example.popularlibrariesapp.data.remote.repo.CashedRetrofitGithubUserReposRepoImpl
-import com.example.popularlibrariesapp.data.remote.repo.CashedRetrofitGithubUsersRepoImpl
 import com.example.popularlibrariesapp.data.remote.retrofit.GithubApi
-import com.example.popularlibrariesapp.domain.datacash.IUserCache
-import com.example.popularlibrariesapp.domain.datacash.IUserRepositoriesCache
 import com.example.popularlibrariesapp.domain.remote.INetworkStatus
 import com.example.popularlibrariesapp.domain.remote.image_loaders.IImageLoader
-import com.example.popularlibrariesapp.domain.remote.repo.GithubUserReposRepo
-import com.example.popularlibrariesapp.domain.remote.repo.GithubUsersRepo
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -70,21 +64,5 @@ class RemoteModule {
     @Provides
     fun api(retrofitClient: Retrofit): GithubApi {
         return retrofitClient.create(GithubApi::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun userRepo(
-        api: GithubApi, networkStatus: INetworkStatus, userCash: IUserCache
-    ): GithubUsersRepo {
-        return CashedRetrofitGithubUsersRepoImpl(api, networkStatus, userCash)
-    }
-
-    @Singleton
-    @Provides
-    fun reposRepo(
-        api: GithubApi, networkStatus: INetworkStatus, reposCash: IUserRepositoriesCache
-    ): GithubUserReposRepo {
-        return CashedRetrofitGithubUserReposRepoImpl(api, networkStatus, reposCash)
     }
 }

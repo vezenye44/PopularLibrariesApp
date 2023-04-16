@@ -25,8 +25,7 @@ class UserProfilePresenter @AssistedInject constructor(
     private val repository: GithubUserReposRepo,
     private val router: Router,
     private val screens: IScreens
-) :
-    MvpPresenter<UsesProfileContract.View>() {
+) : MvpPresenter<UsesProfileContract.View>() {
 
     class UserRepoListPresenter(
     ) : IUserReposListPresenter {
@@ -74,6 +73,7 @@ class UserProfilePresenter @AssistedInject constructor(
     }
 
     override fun onDestroy() {
+        viewState.disableInjection()
         disposable.dispose()
         super.onDestroy()
     }
