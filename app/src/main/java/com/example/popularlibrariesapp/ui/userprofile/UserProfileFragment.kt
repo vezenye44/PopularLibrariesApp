@@ -11,6 +11,7 @@ import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUserProfileBinding
 import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.userprofile.rv.UserReposAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -22,7 +23,9 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
 
     private val presenter: UserProfilePresenter by moxyPresenter {
         val login = arguments?.getString(EXTRA_USER_LOGIN) ?: "Fail"
-        App.instance.appComponent.userProfilePresenterFactory().create(login)
+        App.instance.initUserReposSubcomponent()
+        val subcomponent = App.instance.userReposSubcomponent
+        subcomponent!!.userProfilePresenterFactory().create(login, AndroidSchedulers.mainThread())
     }
 
     override fun onCreateView(
@@ -34,10 +37,19 @@ class UserProfileFragment : MvpAppCompatFragment(), UsesProfileContract.View, Ba
         return binding.root
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun init() {
         binding.fragmentUserProfileReposRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter = UserReposAdapter(presenter.userRepoListPresenter)
         binding.fragmentUserProfileReposRecyclerView.adapter = adapter
+    }
+
+    override fun disableInjection() {
+        App.instance.disableUserReposSubcomponent()
     }
 
 

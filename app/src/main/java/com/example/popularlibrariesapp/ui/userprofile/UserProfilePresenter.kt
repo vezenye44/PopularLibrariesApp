@@ -9,23 +9,23 @@ import com.github.terrakok.cicerone.Router
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import moxy.MvpPresenter
 
 @AssistedFactory
 interface UserProfilePresenterFactory {
-    fun create(usersLogin: String): UserProfilePresenter
+    fun create(usersLogin: String, uiScheduler: Scheduler): UserProfilePresenter
 }
 
 class UserProfilePresenter @AssistedInject constructor(
     @Assisted private val usersLogin: String,
+    @Assisted private val uiScheduler: Scheduler,
     private val repository: GithubUserReposRepo,
     private val router: Router,
     private val screens: IScreens
-) :
-    MvpPresenter<UsesProfileContract.View>() {
+) : MvpPresenter<UsesProfileContract.View>() {
 
     class UserRepoListPresenter(
     ) : IUserReposListPresenter {
@@ -58,7 +58,7 @@ class UserProfilePresenter @AssistedInject constructor(
     private fun loadData() {
         disposable = repository
             .getUserRepos(usersLogin)
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(uiScheduler)
             .subscribeBy(
                 onSuccess = {
                     userRepoListPresenter.users.addAll(it)
@@ -73,6 +73,7 @@ class UserProfilePresenter @AssistedInject constructor(
     }
 
     override fun onDestroy() {
+        viewState.disableInjection()
         disposable.dispose()
         super.onDestroy()
     }

@@ -10,6 +10,7 @@ interface UsesProfileContract {
     interface View : MvpView {
 
         fun init()
+        fun disableInjection()
         fun updateList()
         fun showLogin(login: String)
         fun showToast(message: String)

@@ -19,7 +19,7 @@ class UserRepositoryInfoFragment() : MvpAppCompatFragment(), UserRepositoryInfoC
 
     private val presenter: UserRepositoryInfoPresenter by moxyPresenter {
         val forkCount = arguments?.getString(EXTRA_FORK_COUNT) ?: "Fail"
-        App.instance.appComponent.userRepositoryInfoPresenterFactory().create(forkCount)
+        App.instance.userReposSubcomponent!!.userRepositoryInfoPresenterFactory().create(forkCount)
     }
 
     override fun onCreateView(
