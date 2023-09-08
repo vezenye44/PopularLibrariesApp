@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popularlibrariesapp.App
 import com.example.popularlibrariesapp.databinding.FragmentUsersBinding
+import com.example.popularlibrariesapp.dependency_injection.components.subcomponents.UsersSubcomponent
 import com.example.popularlibrariesapp.ui.base.navigate.BackButtonListener
 import com.example.popularlibrariesapp.ui.users.rv.UsersAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -19,10 +21,13 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
         fun newInstance() = UsersFragment()
     }
 
+    private var subcomponent: UsersSubcomponent? = null
+
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter().apply {
-            App.instance.appComponent.inject(this)
+        App.instance.initUsersSubcomponent().also {
+            subcomponent = it
         }
+        subcomponent!!.usersPresenterFactory().create(AndroidSchedulers.mainThread())
     }
     private var adapter: UsersAdapter? = null
     private var _binding: FragmentUsersBinding? = null
@@ -44,9 +49,14 @@ class UsersFragment : MvpAppCompatFragment(), UsersContract.View, BackButtonList
 
     override fun init() {
         binding.usersFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = App.instance.appComponent.usersAdapterFactory()
-            .create(presenter.usersListPresenter)
+        adapter = subcomponent?.usersAdapterFactory()
+            ?.create(presenter.usersListPresenter)
         binding.usersFragmentRecyclerView.adapter = adapter
+    }
+
+    override fun disableInjection() {
+        App.instance.disableUsersSubcomponent()
+        subcomponent = null
     }
 
     @SuppressLint("NotifyDataSetChanged")

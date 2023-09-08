@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainContract.View {
 
-    @Inject lateinit var navigatorHolder: NavigatorHolder
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
 
     val navigator = AppNavigator(this, R.id.main_activity_container)
     private val presenter by moxyPresenter {
